@@ -102,7 +102,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      let response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?" }
+      let response = "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"
       let quick_replies =  { "quick_replies":[
       {
         "content_type":"text",
@@ -114,7 +114,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       }
     ]}
       // Sends the response message
-      callSendAPI(sender_psid, response, quick_replies);
+      callSendAPI(sender_psid, response);
     });
   }
 }
@@ -128,7 +128,7 @@ function handlePostback(sender_psid, received_postback) {
   if ( payload === 'yes') {
     response = { "text": "Thanks!" }
   } else if ( payload === 'no') {
-    response = { "text": "Got it! If you'd like to have more information pls call +39 123 123 123 123 123"}
+    response = "Got it! If you'd like to have more information pls call +39 123 123 123 123 123"
   }
 
   // Send the message to acknowledge the postback
@@ -137,14 +137,14 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response, quick_replies) {
+function callSendAPI(sender_psid, response) {
   // Constructs the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
     "message":  {
-      "text": "Here is a quick reply!",
+      "text": response,
       "quick_replies":[
         {
           "content_type":"text",
