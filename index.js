@@ -102,7 +102,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"}
+      let response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"}
       quick_replies =  {"quick_replies":[
       {
         "content_type":"text",
