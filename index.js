@@ -1,6 +1,6 @@
 'use strict';
 
-import {getPlacesList} from './places.js';
+import {getPlacesList as getPlacesList} from './places.js';
 // Imports dependencies and set up http server
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
