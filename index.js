@@ -1,6 +1,5 @@
 'use strict';
 
-import {getPlacesList as getPlacesList} from './places.js';
 // Imports dependencies and set up http server
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -155,7 +154,7 @@ function handlePostback(sender_psid, received_postback) {
       break;
     case 10: console.log("10 km selected");
       break;
-    default:
+    default: console.log("default case");
 
   }
 
@@ -190,4 +189,13 @@ function callSendAPI(sender_psid, response, quick_replies) {
       console.error("Unable to send message:" + err);
     }
   });
+}
+
+// Manages the Google Places API
+
+function getPlacesList(query) {
+    const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo
+    request('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+query+'&key='+myKey+, { json: true }, (err, res, body) => {
+      console.log(body);
+    }
 }
