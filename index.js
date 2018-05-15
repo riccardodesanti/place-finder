@@ -98,7 +98,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   }
   else {
     let user_first_name;
-    request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token=EAADErAHrZBCABAASPN5wugmSGxIGKjduZBc6DCRn5GiHLtvoKRWd2bE2QXeXBFV1MybSW1MkHaB1xNujxusWGi8au1QWiysTiR41OiwEZC4CJSbmI2IWfAxRKZBSL8BIVMCMdYFJXUF19tZBnQKZCeZC9uZC83LgvmG1t7uKsepUtgZDZD', { json: true }, (err, res, body) => {
+    request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token=EAADJeIc5WcYBANj41G4RBrr1neEut27zGms780jcZCTP6ffbh4rCrPam28uFCiXVrCsaOZC3RZBLuSHGwvadXn1kgW3HGLX9oND5YZBzM9SZB9rC0yv3926XJrr8iVLuTH0YElbYZBeRVhCZAHmBEdjmiyW2HwVhjcZAwVOtMNy5ywZDZD', { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
@@ -159,7 +159,7 @@ function callSendAPI(sender_psid, response) {
   //Sends the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": "EAADErAHrZBCABAASPN5wugmSGxIGKjduZBc6DCRn5GiHLtvoKRWd2bE2QXeXBFV1MybSW1MkHaB1xNujxusWGi8au1QWiysTiR41OiwEZC4CJSbmI2IWfAxRKZBSL8BIVMCMdYFJXUF19tZBnQKZCeZC9uZC83LgvmG1t7uKsepUtgZDZD"},
+    "qs": { "access_token": "EAADJeIc5WcYBANj41G4RBrr1neEut27zGms780jcZCTP6ffbh4rCrPam28uFCiXVrCsaOZC3RZBLuSHGwvadXn1kgW3HGLX9oND5YZBzM9SZB9rC0yv3926XJrr8iVLuTH0YElbYZBeRVhCZAHmBEdjmiyW2HwVhjcZAwVOtMNy5ywZDZD"},
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
