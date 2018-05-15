@@ -142,17 +142,12 @@ function handlePostback(sender_psid, received_postback) {
   // Gets the payload of the postback
   let payload = received_postback.payload;
   // Set the response based on the postback payload
-  if ( payload === 'yes') {
-    response = { "text": "Thanks!" }
-  } else if ( payload === 'no') {
-    response = "Got it! If you'd like to have more information pls call +39 123 123 123 123 123"
-  }
   switch (payload) {
-    case 1: console.log("1 km selected");
+    case "1": console.log("1 km selected");
       break;
-    case 5: console.log("5 km selected");
+    case "5": console.log("5 km selected");
       break;
-    case 10: console.log("10 km selected");
+    case "10": console.log("10 km selected");
       break;
     default: console.log("default case");
 
