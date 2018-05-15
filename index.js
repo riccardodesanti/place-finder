@@ -108,22 +108,27 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         case "1":
           distance = 1;
           console.log("1 km selected");
+          response = "I'll show you the best rated within 1 km.";
           break;
         case "5":
           distance = 5;
           console.log("5 km selected");
+          response = "I'll show you the best rated within 5 km.";
           break;
         case "10":
           distance = 10;
           console.log("10 km selected");
+          response = "I'll show you the best rated within 10 km.";
           break;
         case "50":
           distance = 50;
           console.log("50 km selected");
+          response = "I'll show you the best rated within 50 km.";
           break;
         case "whatever":
           distance = "whatever";
           console.log("whatever km selected");
+          response = "I'll show you the best rated.";
           break;
         case "distance":
           console.log("distance");
@@ -157,7 +162,6 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         ];
         default: console.log("default case");
       }
-    response = "Great"
     callSendAPI(sender_psid, response, quick_replies);
   }
   else {
