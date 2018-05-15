@@ -94,7 +94,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   if (date && date.confidence > 0.8) {
     let response = { "text" : "Please confirm that you would like to visit us on "+ date.value}
     // Sends the response message
-    callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, response, null);
   }
   else {
     let user_first_name;
@@ -103,7 +103,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
       let response = "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"
-      let quick_replies =  { "quick_replies":[
+      let quick_replies =  [
       {
         "content_type":"text",
         "title":"Search",
@@ -112,9 +112,9 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       {
         "content_type":"location"
       }
-    ]}
+    ];
       // Sends the response message
-      callSendAPI(sender_psid, response);
+      callSendAPI(sender_psid, response, quick_replies);
     });
   }
 }
@@ -137,7 +137,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+function callSendAPI(sender_psid, response, quick_replies) {
   // Constructs the message body
   let request_body = {
     "recipient": {
@@ -145,16 +145,7 @@ function callSendAPI(sender_psid, response) {
     },
     "message":  {
       "text": response,
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"Search",
-          "payload":"<POSTBACK_PAYLOAD>"
-        },
-        {
-          "content_type":"location"
-        }
-      ]
+      "quick_replies": quick_replies
     }
   }
 
