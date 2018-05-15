@@ -88,13 +88,28 @@ function firstEntity(nlp, name) {
 function handleMessage(sender_psid, received_message, user_first_name) {
 
   // Checks if message contains greetings or date/time
-  const greeting = firstEntity(received_message.nlp, 'greetings');
-  const date = firstEntity(received_message.nlp, 'datetime');
-
-  if (date && date.confidence > 0.8) {
-    let response = { "text" : "Please confirm that you would like to visit us on "+ date.value}
-    // Sends the response message
-    callSendAPI(sender_psid, response, null);
+  // const greeting = firstEntity(received_message.nlp, 'greetings');
+  // const date = firstEntity(received_message.nlp, 'datetime');
+  //
+  // if (date && date.confidence > 0.8) {
+  //   let response = { "text" : "Please confirm that you would like to visit us on "+ date.value}
+  //   // Sends the response message
+  //   callSendAPI(sender_psid, response, null);
+  // }
+  // else {
+  if ( received_message.quick_replies) {
+    let payload = received_postback.payload;
+    // Set the response based on the postback payload
+    switch (payload) {
+      case "1": console.log("1 km selected");
+        break;
+      case "5": console.log("5 km selected");
+        break;
+      case "10": console.log("10 km selected");
+        break;
+      default: console.log("default case");
+    }
+    // callSendAPI(sender_psid, response, null);
   }
   else {
     let user_first_name;
@@ -142,16 +157,6 @@ function handlePostback(sender_psid, received_postback) {
   // Gets the payload of the postback
   let payload = received_postback.payload;
   // Set the response based on the postback payload
-  switch (payload) {
-    case "1": console.log("1 km selected");
-      break;
-    case "5": console.log("5 km selected");
-      break;
-    case "10": console.log("10 km selected");
-      break;
-    default: console.log("default case");
-
-  }
 
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response, null);
