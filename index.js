@@ -102,29 +102,20 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      let response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "button",
-              "text": "Hello "+ user_first_name +", Would you like to set an appointment?",
-              "buttons": [
-                {
-                  "type": "postback",
-                  "title": "Yes!",
-                  "payload": "yes",
-                },
-                {
-                  "type": "postback",
-                  "title": "No!",
-                  "payload": "no",
-                }
-              ]
-          }
-        }
+      response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"}
+      quick_replies = "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Search",
+        "payload":"1111111",
+        "image_url":""
+      },
+      {
+        "content_type":"location"
       }
+    ]
       // Sends the response message
-      callSendAPI(sender_psid, response);
+      callSendAPI(sender_psid, response, quick_replies);
     });
   }
 }
@@ -142,18 +133,18 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
+  callSendAPI(sender_psid, response, null);
 
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+function callSendAPI(sender_psid, response, quick_replies) {
   // Constructs the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
-    "message": response
+    "message":  { response, quick_replies }
   }
 
   //Sends the HTTP request to the Messenger Platform
