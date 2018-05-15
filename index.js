@@ -8,6 +8,7 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
 let distance;
+let place;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -89,7 +90,7 @@ function firstEntity(nlp, name) {
 function handleMessage(sender_psid, received_message, user_first_name) {
 
   // Checks if message contains greetings or date/time
-  // const greeting = firstEntity(received_message.nlp, 'greetings');
+  const greeting = firstEntity(received_message.nlp, 'greetings');
   // const date = firstEntity(received_message.nlp, 'datetime');
   //
   // if (date && date.confidence > 0.8) {
@@ -124,6 +125,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           distance = 50;
           console.log("50 km selected");
           response = "I'll show you the best rated within 50 km.";
+          findAndShow(50);
           break;
         case "whatever":
           distance = "whatever";
@@ -132,11 +134,11 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           break;
         case "distance":
           console.log("distance");
-          response = "Which is the maximum distance you prefer?";
+          response = "Which is the maximum distance in km you prefer?";
           quick_replies =  [
           {
             "content_type":"text",
-            "title":" 1 ",
+            "title":"  1  ",
             "payload":"2"
           },
           {
@@ -160,18 +162,29 @@ function handleMessage(sender_psid, received_message, user_first_name) {
             "payload":"whatever"
           },
         ];
+        break;
+        case "rates":
+          console.log("distance");
+          //inserire qui funzione per proseguire
+          break;
         default: console.log("default case");
       }
     callSendAPI(sender_psid, response, quick_replies);
   }
-  else {
+  else if (greeting && greeting.confidence > 0.9)) {
     let user_first_name;
     request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token=EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD', { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      let response = "Hello "+ user_first_name +", I can help you finding the place you are looking for! Do you want me to prefer distance or rate?"
-      let quick_replies =  [
+      let response = "Hello "+ user_first_name +", I can help you. What place are you looking for?";
+      // Sends the response message
+      callSendAPI(sender_psid, response, null);
+  });
+  else {
+    // Creates the payload for a basic text messages
+    let response = "Got it, do you want me to prefer distance or rate?"
+    let quick_replies =  [
       {
         "content_type":"text",
         "title":" distance ",
@@ -183,9 +196,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         "payload":"rates"
       }
     ];
-      // Sends the response message
-      callSendAPI(sender_psid, response, quick_replies);
-    });
+    // Sends the response message
+    callSendAPI(sender_psid, response, quick_replies);
   }
 }
 
@@ -228,12 +240,16 @@ function callSendAPI(sender_psid, response, quick_replies) {
     }
   });
 }
+// Finds the places through the Google Places API and shows them in chat
+function findAndShow(distance) {
+
+}
 
 // Manages the Google Places API
 
 function getPlacesList(query) {
     const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo
     request('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+query+'&key='+myKey, { json: true }, (err, res, body) => {
-      console.log(body);
+      return
     });
 }
