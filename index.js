@@ -106,18 +106,23 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       let quick_replies =  [
       {
         "content_type":"text",
-        "title":"1",
+        "title":" 1 ",
         "payload":"2"
       },
       {
         "content_type":"text",
-        "title":"5",
+        "title":" 5 ",
         "payload":"5"
       },
       {
         "content_type":"text",
-        "title":"10",
+        "title":" 10 ",
         "payload":"10"
+      },
+      {
+        "content_type":"text",
+        "title":" 50 ",
+        "payload":"50"
       },
       {
         "content_type":"text",
