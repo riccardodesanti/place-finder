@@ -197,5 +197,5 @@ function getPlacesList(query) {
     const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo
     request('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+query+'&key='+myKey, { json: true }, (err, res, body) => {
       console.log(body);
-    }
+    });
 }
