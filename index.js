@@ -102,7 +102,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      let response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"}
+      let response = { "text": "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?" }
       let quick_replies =  { "quick_replies":[
       {
         "content_type":"text",
@@ -144,8 +144,17 @@ function callSendAPI(sender_psid, response, quick_replies) {
       "id": sender_psid
     },
     "message":  {
-      response,
-      quick_replies
+      "text": "Here is a quick reply!",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Search",
+          "payload":"<POSTBACK_PAYLOAD>"
+        },
+        {
+          "content_type":"location"
+        }
+      ]
     }
   }
 
