@@ -180,10 +180,11 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       let response = "Hello "+ user_first_name +", I can help you. What place are you looking for?";
       // Sends the response message
       callSendAPI(sender_psid, response, null);
-  });
+    });
+  }
   else {
     // Creates the payload for a basic text messages
-    let response = "Got it, do you want me to prefer distance or rate?"
+    let response = "Got it, do you want me to prefer distance or rate?";
     let quick_replies =  [
       {
         "content_type":"text",
