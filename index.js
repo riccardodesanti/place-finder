@@ -1,5 +1,6 @@
 'use strict';
 
+import {getPlacesList} from './places.js';
 // Imports dependencies and set up http server
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -146,6 +147,16 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Thanks!" }
   } else if ( payload === 'no') {
     response = "Got it! If you'd like to have more information pls call +39 123 123 123 123 123"
+  }
+  switch (payload) {
+    case 1: console.log("1 km selected");
+      break;
+    case 5: console.log("5 km selected");
+      break;
+    case 10: console.log("10 km selected");
+      break;
+    default:
+
   }
 
   // Send the message to acknowledge the postback
