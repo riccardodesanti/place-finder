@@ -171,7 +171,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       }
     callSendAPI(sender_psid, response, quick_replies);
   }
-  else if (greeting && greeting.confidence > 0.9)) {
+  else if (greeting && greeting.confidence > 0.9) {
     let user_first_name;
     request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token=EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD', { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
