@@ -112,17 +112,17 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       {
         "content_type":"text",
         "title":"5",
-        "payload":"2"
+        "payload":"5"
       },
       {
         "content_type":"text",
         "title":"10",
-        "payload":"2"
+        "payload":"10"
       },
       {
         "content_type":"text",
         "title":"whatever",
-        "payload":"2"
+        "payload":"whatever"
       },
     ];
       // Sends the response message
