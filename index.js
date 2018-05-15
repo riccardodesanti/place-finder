@@ -106,12 +106,24 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       let quick_replies =  [
       {
         "content_type":"text",
-        "title":"Search",
-        "payload":"1111111"
+        "title":"1",
+        "payload":"2"
       },
       {
-        "content_type":"location"
-      }
+        "content_type":"text",
+        "title":"5",
+        "payload":"2"
+      },
+      {
+        "content_type":"text",
+        "title":"10",
+        "payload":"2"
+      },
+      {
+        "content_type":"text",
+        "title":"whatever",
+        "payload":"2"
+      },
     ];
       // Sends the response message
       callSendAPI(sender_psid, response, quick_replies);
