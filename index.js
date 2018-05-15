@@ -97,8 +97,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   //   callSendAPI(sender_psid, response, null);
   // }
   // else {
-  if ( received_message.quick_replies) {
-    let payload = received_postback.payload;
+  if ( received_message.quick_reply) {
+    let payload = received_postback.quick_reply[0].payload[0];
     // Set the response based on the postback payload
     switch (payload) {
       case "1": console.log("1 km selected");
