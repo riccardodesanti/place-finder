@@ -7,6 +7,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
+let distance;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -99,17 +100,65 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   // else {
   if ( received_message.quick_reply) {
     let payload = received_message.quick_reply.payload;
+    let response;
+    let quick_replies = null;
+
     // Set the response based on the postback payload
-    switch (payload) {
-      case "1": console.log("1 km selected");
-        break;
-      case "5": console.log("5 km selected");
-        break;
-      case "10": console.log("10 km selected");
-        break;
-      default: console.log("default case");
-    }
-    // callSendAPI(sender_psid, response, null);
+      switch (payload) {
+        case "1":
+          distance = 1;
+          console.log("1 km selected");
+          break;
+        case "5":
+          distance = 5;
+          console.log("5 km selected");
+          break;
+        case "10":
+          distance = 10;
+          console.log("10 km selected");
+          break;
+        case "50":
+          distance = 50;
+          console.log("50 km selected");
+          break;
+        case "whatever":
+          distance = "whatever";
+          console.log("whatever km selected");
+          break;
+        case "distance":
+          console.log("distance");
+          response = "Which is the maximum distance you prefer?";
+          quick_replies =  [
+          {
+            "content_type":"text",
+            "title":" 1 ",
+            "payload":"2"
+          },
+          {
+            "content_type":"text",
+            "title":" 5 ",
+            "payload":"5"
+          },
+          {
+            "content_type":"text",
+            "title":" 10 ",
+            "payload":"10"
+          },
+          {
+            "content_type":"text",
+            "title":" 50 ",
+            "payload":"50"
+          },
+          {
+            "content_type":"text",
+            "title":"whatever",
+            "payload":"whatever"
+          },
+        ];
+        default: console.log("default case");
+      }
+    response = "Great"
+    callSendAPI(sender_psid, response, quick_replies);
   }
   else {
     let user_first_name;
@@ -117,33 +166,18 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
-      let response = "Hello "+ user_first_name +", I can help you finding the restaurant you are looking for! Within how many kms do you want it to be?"
+      let response = "Hello "+ user_first_name +", I can help you finding the place you are looking for! Do you want me to prefer distance or rate?"
       let quick_replies =  [
       {
         "content_type":"text",
-        "title":" 1 ",
-        "payload":"2"
+        "title":" distance ",
+        "payload":"distance"
       },
       {
         "content_type":"text",
-        "title":" 5 ",
-        "payload":"5"
-      },
-      {
-        "content_type":"text",
-        "title":" 10 ",
-        "payload":"10"
-      },
-      {
-        "content_type":"text",
-        "title":" 50 ",
-        "payload":"50"
-      },
-      {
-        "content_type":"text",
-        "title":"whatever",
-        "payload":"whatever"
-      },
+        "title":" rates ",
+        "payload":"rates"
+      }
     ];
       // Sends the response message
       callSendAPI(sender_psid, response, quick_replies);
