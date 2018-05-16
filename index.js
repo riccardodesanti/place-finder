@@ -111,31 +111,31 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         case "1":
           distance = 1;
           console.log("1 km selected");
-          response = "I'll show you the best rated within 1 km.";
+          response = "Great, I'll show you the best rated within 1 km.";
           askPosition(sender_psid);
           break;
         case "5":
           distance = 5;
           console.log("5 km selected");
-          response = "I'll show you the best rated within 5 km.";
+          response = "Great, I'll show you the best rated within 5 km.";
           askPosition(sender_psid);
           break;
         case "10":
           distance = 10;
           console.log("10 km selected");
-          response = "I'll show you the best rated within 10 km.";
+          response = "Great, I'll show you the best rated within 10 km.";
           askPosition(sender_psid);
           break;
         case "50":
           distance = 50;
           console.log("50 km selected");
-          response = "I'll show you the best rated within 50 km.";
+          response = "Great, I'll show you the best rated within 50 km.";
           askPosition(sender_psid);
           break;
         case "whatever":
           distance = "whatever";
           console.log("whatever km selected");
-          response = "I'll show you the best rated.";
+          response = "Great, I'll show you the best rated.";
           askPosition(sender_psid);
           break;
         case "distance":
@@ -173,10 +173,6 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           console.log("distance");
           askPosition(sender_psid);
           break;
-        case "location":
-          console.log("location defined");
-          location = received_message;
-          // findAndShow() //usa le vars location, place e distance definite durante la conversazione per la request a Google API
         default: console.log("default case");
       }
     callSendAPI(sender_psid, response, quick_replies);
@@ -191,6 +187,11 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       // Sends the response message
       callSendAPI(sender_psid, response, null);
     });
+  }
+  else if (received_message.attachment) {
+    lat = received_message.attachments[0].payload.coordinates.lat;
+    lng = received_message.attachments[0].payload.coordinates.long;
+    console.log("lat:"+lat+", lng:"+lng);
   }
   else {
     // Creates the payload for a basic text messages
@@ -254,7 +255,7 @@ function callSendAPI(sender_psid, response, quick_replies) {
   });
 }
 function askPosition(sender_psid) {
-  let response = "Perfect, where are you now?";
+  let response = "Where are you now?";
   let quick_replies =  [
     {
       "content_type":"location",
