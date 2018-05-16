@@ -270,7 +270,7 @@ function askPosition(sender_psid) {
 // Finds the places through the Google Places API and shows them in chat
 function findAndShow(lat, lng) {
 
-  const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo;
+  // const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo;
   // request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=restaurant&keyword=cruise&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
   //   console.log(body);
   // });
