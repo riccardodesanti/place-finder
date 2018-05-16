@@ -8,6 +8,7 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
 let distance;
+let place;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -31,7 +32,7 @@ if (body.object === 'page') {
 
     //Get the sender PSID
     let sender_psid = webhook_event.sender.id;
-    console.log('Sender PSID: ' + sender_psid); 
+    console.log('Sender PSID: ' + sender_psid);
 
     // Check if the event is a message or postback and pass the event to the appropriate handler function
     if (webhook_event.message) {
@@ -184,6 +185,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   else {
     // Creates the payload for a basic text messages
     let response = "Got it, do you want me to prefer distance or rate?";
+    place = received_message;
+    console.log(received_message);
     let quick_replies =  [
       {
         "content_type":"text",
