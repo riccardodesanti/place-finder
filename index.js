@@ -192,7 +192,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
     let lat = received_message.attachments[0].payload.coordinates.lat;
     let lng = received_message.attachments[0].payload.coordinates.long;
     console.log("lat:"+lat+", lng:"+lng);
-    findAndShow(lat, lng);
+    findAndShow(lat, lng, sender_psid);
   }
   else {
     // Creates the payload for a basic text messages
@@ -273,7 +273,7 @@ function askPosition(sender_psid) {
 }
 
 // Finds the places through the Google Places API and shows them in chat
-function findAndShow(lat, lng) {
+function findAndShow(lat, lng, sender_psid) {
   if ( distance == undefined ) { distance = 30; }
   console.log("the env vars are: place:"+place+", lat:"+lat+", lng: "+lng+", distance"+distance);
   console.log('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&query=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo');
@@ -282,6 +282,77 @@ function findAndShow(lat, lng) {
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
 
-  });
+     let request_body = {
+       "recipient": {
+         "id": sender_psid
+       },
+       "message": {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "list",
+              "top_element_style": "compact",
+              "elements": [
+                {
+                  "title": "Classic T-Shirt Collection",
+                  "subtitle": "See all our colors",
+                  "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",
+                  "buttons": [
+                    {
+                      "title": "View",
+                      "type": "web_url",
+                      "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                      "messenger_extensions": true,
+                      "webview_height_ratio": "tall",
+                      "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    }
+                  ]
+                },
+                {
+                  "title": "Classic White T-Shirt",
+                  "subtitle": "See all our colors",
+                  "default_action": {
+                    "type": "web_url",
+                    "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                    "messenger_extensions": false,
+                    "webview_height_ratio": "tall"
+                  }
+                },
+                {
+                  "title": "Classic Blue T-Shirt",
+                  "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+                  "subtitle": "100% Cotton, 200% Comfortable",
+                  "default_action": {
+                    "type": "web_url",
+                    "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                    "messenger_extensions": true,
+                    "webview_height_ratio": "tall",
+                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                  },
+                  "buttons": [
+                    {
+                      "title": "Shop Now",
+                      "type": "web_url",
+                      "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                      "messenger_extensions": true,
+                      "webview_height_ratio": "tall",
+                      "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    }
+                  ]
+                }
+              ],
+               "buttons": [
+                {
+                  "title": "View More",
+                  "type": "postback",
+                  "payload": "payload"
+                }
+              ]
+            }
+          }
+        }
+     }
 
+  });
+  postMessage(request_body);
 }
