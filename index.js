@@ -111,7 +111,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           console.log("1 km selected");
           response = "I'll show you the best rated within 1 km.";
           break;
-        case "5":
+        case "5": 
           distance = 5;
           console.log("5 km selected");
           response = "I'll show you the best rated within 5 km.";
