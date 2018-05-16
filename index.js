@@ -242,6 +242,11 @@ function callSendAPI(sender_psid, response, quick_replies) {
   }
 
   //Sends the HTTP request to the Messenger Platform
+  postMessage(request_body);
+}
+
+function postMessage(request_body) {
+  //Sends the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
     "qs": { "access_token": "EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD"},
@@ -276,6 +281,7 @@ function findAndShow(lat, lng) {
   const myKey = "AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo";
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
+
   });
 
 }
