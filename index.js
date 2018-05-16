@@ -188,7 +188,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       callSendAPI(sender_psid, response, null);
     });
   }
-  else if (received_message.attachment) {
+  else if (received_message.attachments) {
     lat = received_message.attachments[0].payload.coordinates.lat;
     lng = received_message.attachments[0].payload.coordinates.long;
     console.log("lat:"+lat+", lng:"+lng);
