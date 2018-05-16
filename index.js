@@ -189,8 +189,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
     });
   }
   else if (received_message.attachments) {
-    lat = received_message.attachments[0].payload.coordinates.lat;
-    lng = received_message.attachments[0].payload.coordinates.long;
+    let lat = received_message.attachments[0].payload.coordinates.lat;
+    let lng = received_message.attachments[0].payload.coordinates.long;
     console.log("lat:"+lat+", lng:"+lng);
   }
   else {
