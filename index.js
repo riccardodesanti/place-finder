@@ -274,7 +274,7 @@ function findAndShow(lat, lng) {
   console.log('maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 + '1500&type=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo');
 
   const myKey = "AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo";
-   request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 + '1500&type=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
+   request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 + '&type=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
   });
 
