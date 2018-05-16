@@ -184,6 +184,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   }
   else {
     // Creates the payload for a basic text messages
+    place = received_message;
+    console.log(place);
     let response = "Got it, do you want me to prefer distance or rate?";
     let quick_replies =  [
       {
