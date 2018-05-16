@@ -9,6 +9,7 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 let distance;
 let place;
+let location;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -91,6 +92,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
 
   // Checks if message contains greetings or date/time
   const greeting = firstEntity(received_message.nlp, 'greetings');
+  const position = firstEntity(received_message.nlp, 'location');
   // const date = firstEntity(received_message.nlp, 'datetime');
   //
   // if (date && date.confidence > 0.8) {
@@ -110,27 +112,31 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           distance = 1;
           console.log("1 km selected");
           response = "I'll show you the best rated within 1 km.";
+          askPosition(sender_psid);
           break;
         case "5":
           distance = 5;
           console.log("5 km selected");
           response = "I'll show you the best rated within 5 km.";
+          askPosition(sender_psid);
           break;
         case "10":
           distance = 10;
           console.log("10 km selected");
           response = "I'll show you the best rated within 10 km.";
+          askPosition(sender_psid);
           break;
         case "50":
           distance = 50;
           console.log("50 km selected");
           response = "I'll show you the best rated within 50 km.";
-          findAndShow(50);
+          askPosition(sender_psid);
           break;
         case "whatever":
           distance = "whatever";
           console.log("whatever km selected");
           response = "I'll show you the best rated.";
+          askPosition(sender_psid);
           break;
         case "distance":
           console.log("distance");
@@ -165,8 +171,12 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         break;
         case "rates":
           console.log("distance");
-          //inserire qui funzione per proseguire
+          askPosition(sender_psid);
           break;
+        case "location":
+          console.log("location defined");
+          location = received_message;
+          // findAndShow() //usa le vars location, place e distance definite durante la conversazione per la request a Google API
         default: console.log("default case");
       }
     callSendAPI(sender_psid, response, quick_replies);
@@ -243,16 +253,24 @@ function callSendAPI(sender_psid, response, quick_replies) {
     }
   });
 }
+function askPosition(sender_psid) {
+  let response = "Perfect, where are you now?";
+  let quick_replies =  [
+    {
+      "content_type":"location",
+      "title":" Location ",
+      "payload":"location"
+    }
+  ];
+  callSendAPI(sender_psid, response, quick_replies);
+}
+
 // Finds the places through the Google Places API and shows them in chat
 function findAndShow(distance) {
 
-}
+  const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo
+  request('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+query+'&key='+myKey, { json: true }, (err, res, body) => {
+    return
+  });
 
-// Manages the Google Places API
-
-function getPlacesList(query) {
-    const myKey = AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo
-    request('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+query+'&key='+myKey, { json: true }, (err, res, body) => {
-      return
-    });
 }
