@@ -8,7 +8,6 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
 let distance;
-let place;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -111,7 +110,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           console.log("1 km selected");
           response = "I'll show you the best rated within 1 km.";
           break;
-        case "5": 
+        case "5":
           distance = 5;
           console.log("5 km selected");
           response = "I'll show you the best rated within 5 km.";
@@ -184,8 +183,6 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   }
   else {
     // Creates the payload for a basic text messages
-    place = received_message;
-    console.log(place);
     let response = "Got it, do you want me to prefer distance or rate?";
     let quick_replies =  [
       {
