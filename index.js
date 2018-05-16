@@ -353,7 +353,7 @@ function findAndShow(lat, lng, sender_psid) {
         }
      }
 
+     console.log("request_body defined");
+     postMessage(request_body);
   });
-  console.log("request_body defined");
-  postMessage(request_body);
 }
