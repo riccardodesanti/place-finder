@@ -285,7 +285,7 @@ function findAndShow(lat, lng, sender_psid) {
      let img_url0 = body.results[0].photos[0] ? body.results[0].photos[0] :  body.results[0].icon;
      let img_url1 = body.results[1].photos[0] ? body.results[1].photos[0] :  body.results[1].icon;
      let img_url2 = body.results[2].photos[0] ? body.results[2].photos[0] :  body.results[2].icon;
-
+     console.log("URL PHOTO: "+ body.results[1].photos[0]);
      let request_body = {
        // "messaging_type": "application/json",
        "recipient": {
