@@ -292,7 +292,7 @@ function findAndShow(lat, lng, sender_psid) {
             "type": "template",
             "payload": {
               "template_type": "list",
-              "top_element_style": "compact",
+              "top_element_style": "large",
               "elements": [
                 {
                   "title": "Classic T-Shirt Collection",
@@ -310,29 +310,27 @@ function findAndShow(lat, lng, sender_psid) {
                   ]
                 },
                 {
-                  "title": "Classic White T-Shirt",
+                  "title": "Classic T-Shirt Collection",
                   "subtitle": "See all our colors",
-                  "default_action": {
-                    "type": "web_url",
-                    "url": "http://www.riccardodesanti.com",
-                    // "messenger_extensions": false,
-                    "webview_height_ratio": "tall"
-                  }
-                },
-                {
-                  "title": "Classic Blue T-Shirt",
                   "image_url": "http://www.riccardodesanti.com/images/main-image.png",
-                  "subtitle": "100% Cotton, 200% Comfortable",
-                  "default_action": {
-                    "type": "web_url",
-                    "url": "http://www.riccardodesanti.com",
-                    // "messenger_extensions": true,
-                    "webview_height_ratio": "tall",
-                    // "fallback_url": ""
-                  },
                   "buttons": [
                     {
-                      "title": "Shop Now",
+                      "title": "View",
+                      "type": "web_url",
+                      "url": "http://www.riccardodesanti.com",
+                      // "messenger_extensions": true,
+                      "webview_height_ratio": "tall",
+                      // "fallback_url": ""
+                    }
+                  ]
+                },
+                {
+                  "title": "Classic T-Shirt Collection",
+                  "subtitle": "See all our colors",
+                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "buttons": [
+                    {
+                      "title": "View",
                       "type": "web_url",
                       "url": "http://www.riccardodesanti.com",
                       // "messenger_extensions": true,
