@@ -282,84 +282,76 @@ function findAndShow(lat, lng, sender_psid) {
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
 
-     // let request_body = {
-     //   "recipient": {
-     //     "id": sender_psid
-     //   },
-     //   "message": {
-     //      "attachment": {
-     //        "type": "template",
-     //        "payload": {
-     //          "template_type": "list",
-     //          "top_element_style": "large",
-     //          "elements": [
-     //            {
-     //              "title": "Classic T-Shirt Collection",
-     //              "subtitle": "See all our colors",
-     //              "image_url": "http://www.riccardodesanti.com/images/main-image.png",
-     //              "buttons": [
-     //                {
-     //                  "title": "View",
-     //                  "type": "web_url",
-     //                  "url": "http://www.riccardodesanti.com",
-     //                  "messenger_extensions": true,
-     //                  "webview_height_ratio": "tall",
-     //                  "fallback_url": ""
-     //                }
-     //              ]
-     //            },
-     //            {
-     //              "title": "Classic White T-Shirt",
-     //              "subtitle": "See all our colors",
-     //              "default_action": {
-     //                "type": "web_url",
-     //                "url": "http://www.riccardodesanti.com",
-     //                "messenger_extensions": false,
-     //                "webview_height_ratio": "tall"
-     //              }
-     //            },
-     //            {
-     //              "title": "Classic Blue T-Shirt",
-     //              "image_url": "http://www.riccardodesanti.com/images/main-image.png",
-     //              "subtitle": "100% Cotton, 200% Comfortable",
-     //              "default_action": {
-     //                "type": "web_url",
-     //                "url": "http://www.riccardodesanti.com",
-     //                "messenger_extensions": true,
-     //                "webview_height_ratio": "tall",
-     //                "fallback_url": ""
-     //              },
-     //              "buttons": [
-     //                {
-     //                  "title": "Shop Now",
-     //                  "type": "web_url",
-     //                  "url": "http://www.riccardodesanti.com",
-     //                  "messenger_extensions": true,
-     //                  "webview_height_ratio": "tall",
-     //                  "fallback_url": ""
-     //                }
-     //              ]
-     //            }
-     //          ],
-     //           "buttons": [
-     //            {
-     //              "title": "View More",
-     //              "type": "postback",
-     //              "payload": "payload"
-     //            }
-     //          ]
-     //        }
-     //      }
-     //    }
-     // }
-
      let request_body = {
+       "messaging_type": "text",
        "recipient": {
          "id": sender_psid
        },
-       "message":  {
-         "text": "This is a TEST"
-       }
+       "message": {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "list",
+              "top_element_style": "large",
+              "elements": [
+                {
+                  "title": "Classic T-Shirt Collection",
+                  "subtitle": "See all our colors",
+                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "buttons": [
+                    {
+                      "title": "View",
+                      "type": "web_url",
+                      "url": "http://www.riccardodesanti.com",
+                      "messenger_extensions": true,
+                      "webview_height_ratio": "tall",
+                      "fallback_url": ""
+                    }
+                  ]
+                },
+                {
+                  "title": "Classic White T-Shirt",
+                  "subtitle": "See all our colors",
+                  "default_action": {
+                    "type": "web_url",
+                    "url": "http://www.riccardodesanti.com",
+                    "messenger_extensions": false,
+                    "webview_height_ratio": "tall"
+                  }
+                },
+                {
+                  "title": "Classic Blue T-Shirt",
+                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "subtitle": "100% Cotton, 200% Comfortable",
+                  "default_action": {
+                    "type": "web_url",
+                    "url": "http://www.riccardodesanti.com",
+                    "messenger_extensions": true,
+                    "webview_height_ratio": "tall",
+                    "fallback_url": ""
+                  },
+                  "buttons": [
+                    {
+                      "title": "Shop Now",
+                      "type": "web_url",
+                      "url": "http://www.riccardodesanti.com",
+                      "messenger_extensions": true,
+                      "webview_height_ratio": "tall",
+                      "fallback_url": ""
+                    }
+                  ]
+                }
+              ],
+               "buttons": [
+                {
+                  "title": "View More",
+                  "type": "postback",
+                  "payload": "payload"
+                }
+              ]
+            }
+          }
+        }
      }
 
      console.log("request_body defined");
