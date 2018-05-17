@@ -295,8 +295,8 @@ function findAndShow(lat, lng, sender_psid) {
               "top_element_style": "large",
               "elements": [
                 {
-                  "title": "Classic T-Shirt Collection",
-                  "subtitle": "See all our colors",
+                  "title": body.results[0].name,
+                  "subtitle": body.results[0].vicinity,
                   "image_url": body.results[0].icon,
                   "buttons": [
                     {
@@ -310,8 +310,8 @@ function findAndShow(lat, lng, sender_psid) {
                   ]
                 },
                 {
-                  "title": "Classic T-Shirt Collection",
-                  "subtitle": "See all our colors",
+                  "title": body.results[1].name,
+                  "subtitle": body.results[1].vicinity,
                   "image_url": body.results[1].icon,
                   "buttons": [
                     {
@@ -325,8 +325,8 @@ function findAndShow(lat, lng, sender_psid) {
                   ]
                 },
                 {
-                  "title": "Classic T-Shirt Collection",
-                  "subtitle": "See all our colors",
+                  "title": body.results[2].name,
+                  "subtitle": body.results[2].vicinity,
                   "image_url": body.results[2].icon,
                   "buttons": [
                     {
