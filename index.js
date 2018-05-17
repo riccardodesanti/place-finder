@@ -282,9 +282,11 @@ function findAndShow(lat, lng, sender_psid) {
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
 
-     let img_url0 = body.results[0].photos[0] ? body.results[0].photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35}) :  body.results[0].icon;
-     let img_url1 = body.results[1].photos[0] ? body.results[1].photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35}) :  body.results[1].icon;
-     let img_url2 = body.results[2].photos[0] ? body.results[2].photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35}) :  body.results[2].icon;
+     let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
+
+     let img_url0 = body.results[0].icon;
+     let img_url1 = body.results[1].icon;
+     let img_url2 = body.results[2].icon;
      console.log("URL PHOTO: "+ body.results[1].photos[0]);
      let request_body = {
        // "messaging_type": "application/json",
@@ -316,7 +318,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[1].name,
                   "subtitle": body.results[1].vicinity,
-                  "image_url": img_url1,
+                  "image_url": imgTest,
                   "buttons": [
                     {
                       "title": "View",
