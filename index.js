@@ -111,31 +111,31 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         case "1":
           distance = 1;
           console.log("1 km selected");
-          response = "Great, I'll show you the best rated within 1 km.";
+          // response = "Great, I'll show you the best rated within 1 km.";
           break;
         case "5":
           distance = 5;
           console.log("5 km selected");
-          response = "Great, I'll show you the best rated within 5 km.";
+          // response = "Great, I'll show you the best rated within 5 km.";
           break;
         case "10":
           distance = 10;
           console.log("10 km selected");
-          response = "Great, I'll show you the best rated within 10 km.";
+          // response = "Great, I'll show you the best rated within 10 km.";
           break;
         case "50":
           distance = 50;
           console.log("50 km selected");
-          response = "Great, I'll show you the best rated within 50 km.";
+          // response = "Great, I'll show you the best rated within 50 km.";
           break;
         case "whatever":
           distance = "whatever";
           console.log("whatever km selected");
-          response = "Great, I'll show you the best rated.";
+          // response = "Great, I'll show you the best rated.";
           break;
         case "distance":
           console.log("distance");
-          response = "What is the maximum distance in kilometers that you prefer?";
+          // response = "What is the maximum distance in kilometers that you prefer?";
           quick_replies =  [
           {
             "content_type":"text",
@@ -169,7 +169,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           break;
         default: console.log("default case");
       }
-    callSendAPI(sender_psid, response, quick_replies);
+    // callSendAPI(sender_psid, response, quick_replies);
     if (payload != "distance") { askPosition(sender_psid); }
   }
   else if (greeting && greeting.confidence > 0.9) {
@@ -256,7 +256,7 @@ function postMessage(request_body) {
   });
 }
 function askPosition(sender_psid) {
-  let response = "Where are you now?";
+  let response = "Great, where are you now?";
   let quick_replies =  [
     {
       "content_type":"location",
