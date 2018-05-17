@@ -297,7 +297,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": "Classic T-Shirt Collection",
                   "subtitle": "See all our colors",
-                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "image_url": body.results[0].icon,
                   "buttons": [
                     {
                       "title": "View",
@@ -312,7 +312,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": "Classic T-Shirt Collection",
                   "subtitle": "See all our colors",
-                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "image_url": body.results[1].icon,
                   "buttons": [
                     {
                       "title": "View",
@@ -327,7 +327,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": "Classic T-Shirt Collection",
                   "subtitle": "See all our colors",
-                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "image_url": body.results[2].icon,
                   "buttons": [
                     {
                       "title": "View",
@@ -351,7 +351,6 @@ function findAndShow(lat, lng, sender_psid) {
           }
         }
      }
-     console.log(body.results[0].photos[0]);
      console.log("request_body defined");
      postMessage(request_body);
   });
