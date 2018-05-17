@@ -135,7 +135,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           break;
         case "distance":
           console.log("distance");
-          response = "Which is the maximum distance in km you prefer?";
+          response = "What is the maximum distance in kilometers that you prefer?";
           quick_replies =  [
           {
             "content_type":"text",
@@ -169,8 +169,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           break;
         default: console.log("default case");
       }
-    if (payload != "distance") { askPosition(sender_psid); }
     callSendAPI(sender_psid, response, quick_replies);
+    if (payload != "distance") { askPosition(sender_psid); }
   }
   else if (greeting && greeting.confidence > 0.9) {
     let user_first_name;
