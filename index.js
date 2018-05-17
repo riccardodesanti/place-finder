@@ -37,11 +37,11 @@ if (body.object === 'page') {
     console.log('Sender PSID: ' + sender_psid);
 
     // Check if the event is a message or postback and pass the event to the appropriate handler function
-    if (webhook_event.message) {
+    // if (webhook_event.message) {
       handleMessage(sender_psid, webhook_event.message);
-    } else if (webhook_event.postback) {
-      handlePostback(sender_psid, webhook_event.postback);
-    }
+    // } else if (webhook_event.postback) {
+    //   handlePostback(sender_psid, webhook_event.postback);
+    // }
   });
 
   // Returns a '200 OK' response to all requests
@@ -167,16 +167,15 @@ function handleMessage(sender_psid, received_message, user_first_name) {
     });
   }
   else if (received_message.attachments) {
+    //Takes lat and lng from the location received
     let lat = received_message.attachments[0].payload.coordinates.lat;
     let lng = received_message.attachments[0].payload.coordinates.long;
-    console.log("lat:"+lat+", lng:"+lng);
     findAndShow(lat, lng, sender_psid);
   }
   else {
     // Creates the payload for a basic text messages
     let response = "Got it, do you want me to prefer distance or prominence?";
     place = received_message.text;
-    console.log(received_message);
     let quick_replies =  [
       {
         "content_type":"text",
@@ -195,16 +194,13 @@ function handleMessage(sender_psid, received_message, user_first_name) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
-  let response;
-  // Gets the payload of the postback
-  let payload = received_postback.payload;
-  // Set the response based on the postback payload
-
-  // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response, null);
-
-}
+// function handlePostback(sender_psid, received_postback) {
+//   let response;
+//   // Gets the payload of the postback
+//   let payload = received_postback.payload;
+//   // Send the message to acknowledge the postback
+//   callSendAPI(sender_psid, response, null);
+// }
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response, quick_replies) {
