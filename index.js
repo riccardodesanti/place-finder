@@ -291,20 +291,20 @@ function findAndShow(lat, lng, sender_psid) {
             "type": "template",
             "payload": {
               "template_type": "list",
-              "top_element_style": "compact",
+              "top_element_style": "large",
               "elements": [
                 {
                   "title": "Classic T-Shirt Collection",
                   "subtitle": "See all our colors",
-                  "image_url": "https://peterssendreceiveapp.ngrok.io/img/collection.png",
+                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
                   "buttons": [
                     {
                       "title": "View",
                       "type": "web_url",
-                      "url": "https://peterssendreceiveapp.ngrok.io/collection",
+                      "url": "http://www.riccardodesanti.com",
                       "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                      "fallback_url": ""
                     }
                   ]
                 },
@@ -313,30 +313,30 @@ function findAndShow(lat, lng, sender_psid) {
                   "subtitle": "See all our colors",
                   "default_action": {
                     "type": "web_url",
-                    "url": "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                    "url": "http://www.riccardodesanti.com",
                     "messenger_extensions": false,
                     "webview_height_ratio": "tall"
                   }
                 },
                 {
                   "title": "Classic Blue T-Shirt",
-                  "image_url": "https://peterssendreceiveapp.ngrok.io/img/blue-t-shirt.png",
+                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
                   "subtitle": "100% Cotton, 200% Comfortable",
                   "default_action": {
                     "type": "web_url",
-                    "url": "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                    "url": "http://www.riccardodesanti.com",
                     "messenger_extensions": true,
                     "webview_height_ratio": "tall",
-                    "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                    "fallback_url": ""
                   },
                   "buttons": [
                     {
                       "title": "Shop Now",
                       "type": "web_url",
-                      "url": "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                      "url": "http://www.riccardodesanti.com",
                       "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
+                      "fallback_url": ""
                     }
                   ]
                 }
