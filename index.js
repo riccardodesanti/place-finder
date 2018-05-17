@@ -112,31 +112,26 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           distance = 1;
           console.log("1 km selected");
           response = "Great, I'll show you the best rated within 1 km.";
-          askPosition(sender_psid);
           break;
         case "5":
           distance = 5;
           console.log("5 km selected");
           response = "Great, I'll show you the best rated within 5 km.";
-          askPosition(sender_psid);
           break;
         case "10":
           distance = 10;
           console.log("10 km selected");
           response = "Great, I'll show you the best rated within 10 km.";
-          askPosition(sender_psid);
           break;
         case "50":
           distance = 50;
           console.log("50 km selected");
           response = "Great, I'll show you the best rated within 50 km.";
-          askPosition(sender_psid);
           break;
         case "whatever":
           distance = "whatever";
           console.log("whatever km selected");
           response = "Great, I'll show you the best rated.";
-          askPosition(sender_psid);
           break;
         case "distance":
           console.log("distance");
@@ -169,12 +164,12 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           },
         ];
         break;
-        case "rates":
+        case "prominence":
           console.log("distance");
-          askPosition(sender_psid);
           break;
         default: console.log("default case");
       }
+    if (payload != "distance") { askPosition(sender_psid); }
     callSendAPI(sender_psid, response, quick_replies);
   }
   else if (greeting && greeting.confidence > 0.9) {
@@ -196,7 +191,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   }
   else {
     // Creates the payload for a basic text messages
-    let response = "Got it, do you want me to prefer distance or rate?";
+    let response = "Got it, do you want me to prefer distance or prominence?";
     place = received_message.text;
     console.log(received_message);
     let quick_replies =  [
@@ -207,8 +202,8 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       },
       {
         "content_type":"text",
-        "title":" rates ",
-        "payload":"rates"
+        "title":" prominence ",
+        "payload":"prominence"
       }
     ];
     // Sends the response message
