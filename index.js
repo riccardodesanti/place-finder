@@ -331,7 +331,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[2].name,
                   "subtitle": body.results[2].vicinity,
-                  "image_url": img_url3,
+                  "image_url": img_url2,
                   "buttons": [
                     {
                       "title": "View",
