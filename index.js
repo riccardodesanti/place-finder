@@ -282,8 +282,8 @@ function findAndShow(lat, lng, sender_psid) {
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
 
-     let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
-     console.log("https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey);
+     let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
+     // console.log("https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey);
      let img_url0 = body.results[0].icon;
      let img_url1 = body.results[1].icon;
      let img_url2 = body.results[2].icon;
