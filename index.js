@@ -15,33 +15,20 @@ let location;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-
-
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
-
 
 let body = req.body;
 
 // Checks this is an event from a page subscription
 if (body.object === 'page') {
-
   // Iterates over each entry - there may be multiple if batched
   body.entry.forEach(function(entry) {
     // Gets the body of the webhook event
     let webhook_event = entry.messaging[0];
-    console.log(webhook_event);
-
     //Get the sender PSID
     let sender_psid = webhook_event.sender.id;
-    console.log('Sender PSID: ' + sender_psid);
-
-    // Check if the event is a message or postback and pass the event to the appropriate handler function
-    // if (webhook_event.message) {
-      handleMessage(sender_psid, webhook_event.message);
-    // } else if (webhook_event.postback) {
-    //   handlePostback(sender_psid, webhook_event.postback);
-    // }
+    handleMessage(sender_psid, webhook_event.message);
   });
 
   // Returns a '200 OK' response to all requests
@@ -170,6 +157,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
     //Takes lat and lng from the location received
     let lat = received_message.attachments[0].payload.coordinates.lat;
     let lng = received_message.attachments[0].payload.coordinates.long;
+    //Finds the places through Google's Places API
     findAndShow(lat, lng, sender_psid);
   }
   else {
@@ -193,15 +181,6 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   }
 }
 
-// Handles messaging_postbacks events
-// function handlePostback(sender_psid, received_postback) {
-//   let response;
-//   // Gets the payload of the postback
-//   let payload = received_postback.payload;
-//   // Send the message to acknowledge the postback
-//   callSendAPI(sender_psid, response, null);
-// }
-
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response, quick_replies) {
   // Constructs the message body
@@ -214,7 +193,6 @@ function callSendAPI(sender_psid, response, quick_replies) {
       "quick_replies": quick_replies
     }
   }
-
   //Sends the HTTP request to the Messenger Platform
   postMessage(request_body);
 }
@@ -234,6 +212,7 @@ function postMessage(request_body) {
     }
   });
 }
+
 function askPosition(sender_psid) {
   let response = "Great, where are you now?";
   let quick_replies =  [
@@ -249,21 +228,13 @@ function askPosition(sender_psid) {
 // Finds the places through the Google Places API and shows them in chat
 function findAndShow(lat, lng, sender_psid) {
   if ( distance == undefined ) { distance = 30; }
-  console.log("the env vars are: place:"+place+", lat:"+lat+", lng: "+lng+", distance"+distance);
-  console.log('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&query=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo');
-
   const myKey = "AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo";
-   request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
-     console.log(body);
-
-     // let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
-     //If the photos field is present it shows the first photo, otherwise it shows the general business photo.
+  request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
+     //If the photos field is present it shows the first photo (combining the general url with the photo_reference property), otherwise it shows the general-business photo.
      let img_url0 = body.results[0].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[0].photos[0].photo_reference+"&key="+myKey : body.results[0].icon;
      let img_url1 = body.results[1].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey : body.results[1].icon;
      let img_url2 = body.results[2].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[2].photos[0].photo_reference+"&key="+myKey : body.results[2].icon;
-     console.log("URL PHOTO: "+ body.results[1].photos[0]);
      let request_body = {
-       // "messaging_type": "application/json",
        "recipient": {
          "id": sender_psid
        },
@@ -283,9 +254,7 @@ function findAndShow(lat, lng, sender_psid) {
                       "title": "View",
                       "type": "web_url",
                       "url": "https://www.google.com/maps/search/?api=1&query="+body.results[0].name+" "+ body.results[0].vicinity +"&query_place_id="+body.results[0].place_id,
-                      // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      // "fallback_url": ""
                     }
                   ]
                 },
@@ -298,9 +267,7 @@ function findAndShow(lat, lng, sender_psid) {
                       "title": "View",
                       "type": "web_url",
                       "url": "https://www.google.com/maps/search/?api=1&query="+body.results[1].name+" "+ body.results[1].vicinity +"&query_place_id="+body.results[1].place_id,
-                      // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      // "fallback_url": ""
                     }
                   ]
                 },
@@ -313,9 +280,7 @@ function findAndShow(lat, lng, sender_psid) {
                       "title": "View",
                       "type": "web_url",
                       "url": "https://www.google.com/maps/search/?api=1&query="+body.results[2].name+" "+ body.results[2].vicinity +"&query_place_id="+body.results[2].place_id,
-                      // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      // "fallback_url": ""
                     }
                   ]
                 }
@@ -324,7 +289,6 @@ function findAndShow(lat, lng, sender_psid) {
           }
         }
      }
-     console.log("request_body defined");
      postMessage(request_body);
   });
 }
