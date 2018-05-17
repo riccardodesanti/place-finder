@@ -282,11 +282,11 @@ function findAndShow(lat, lng, sender_psid) {
    request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + ',' + lng + '&radius=' + distance*1000 +'&keyword=' + place + '&key=AIzaSyDFcTJgoRraYVYamm4msIbDrjt51WWDeZo', { json: true }, (err, res, body) => {
      console.log(body);
 
-     let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
-     // console.log("https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey);
-     let img_url0 = body.results[0].icon;
-     let img_url1 = body.results[1].icon;
-     let img_url2 = body.results[2].icon;
+     // let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
+     //If the photos field is present it shows the first photo, otherwise it shows the general business photo.
+     let img_url0 = body.results[0].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[0].photos[0].photo_reference+"&key="+myKey : body.results[0].icon;
+     let img_url1 = body.results[1].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey : body.results[1].icon;
+     let img_url2 = body.results[2].photos ? "https://maps.googleapis.com/maps/api/place/photo?maxwidth=350&photoreference="+body.results[2].photos[0].photo_reference+"&key="+myKey : body.results[2].icon;
      console.log("URL PHOTO: "+ body.results[1].photos[0]);
      let request_body = {
        // "messaging_type": "application/json",
@@ -303,7 +303,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[0].name,
                   "subtitle": body.results[0].vicinity,
-                  "image_url": imgTest,
+                  "image_url": img_url0,
                   "buttons": [
                     {
                       "title": "View",
@@ -318,7 +318,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[1].name,
                   "subtitle": body.results[1].vicinity,
-                  "image_url": imgTest,
+                  "image_url": img_url1,
                   "buttons": [
                     {
                       "title": "View",
