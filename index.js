@@ -297,7 +297,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[0].name,
                   "subtitle": body.results[0].vicinity,
-                  "image_url": body.results[0].icon,
+                  "image_url": body.results[0].photos[0] ? body.results[0].photos[0] :  body.results[0].icon,
                   "buttons": [
                     {
                       "title": "View",
@@ -312,7 +312,7 @@ function findAndShow(lat, lng, sender_psid) {
                 {
                   "title": body.results[1].name,
                   "subtitle": body.results[1].vicinity,
-                  "image_url": body.results[1].icon,
+                  "image_url": body.results[1].photos[0] ? body.results[1].photos[0] :  body.results[1].icon,
                   "buttons": [
                     {
                       "title": "View",
