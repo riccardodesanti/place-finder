@@ -171,7 +171,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
       }
     // callSendAPI(sender_psid, response, quick_replies);
     if (payload == "distance") {
-      callSendAPI(sender_psid, response, quick_replies)
+      callSendAPI(sender_psid, response, quick_replies);
     } else {
       askPosition(sender_psid);
     }
