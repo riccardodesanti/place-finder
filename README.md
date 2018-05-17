@@ -4,3 +4,12 @@
 # Why ?
 I created this simple project in order to work with the Facebook Messenger Platform APIs, its Buil-in NLP ( which, in the long run, is my actual interest ), Google's Places API and its friends.
 As for the hosting platform, I used Heroku ( linking it directly with GitHub and the latter with Atom ).
+
+# Example:
+
+<p align="center">
+  <img src="images/screen1.png" width="215"/>
+  <img src="images/screen2.png" width="215"/>
+  <img src="images/screen3.png" width="215"/>
+  <img src="images/screen4.png" width="215"/>
+</p>
