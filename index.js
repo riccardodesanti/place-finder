@@ -170,7 +170,11 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         default: console.log("default case");
       }
     // callSendAPI(sender_psid, response, quick_replies);
-    if (payload != "distance") { askPosition(sender_psid); }
+    if (payload == "distance") {
+      callSendAPI(sender_psid, response, quick_replies)
+    } else {
+      askPosition(sender_psid);
+    }
   }
   else if (greeting && greeting.confidence > 0.9) {
     let user_first_name;
