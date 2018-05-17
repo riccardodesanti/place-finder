@@ -302,7 +302,7 @@ function findAndShow(lat, lng, sender_psid) {
               "elements": [
                 {
                   "title": body.results[0].name,
-                  "subtitle": body.results[0].vicinity,
+                  "subtitle": body.results[0].rating,
                   "image_url": img_url0,
                   "buttons": [
                     {
@@ -317,13 +317,13 @@ function findAndShow(lat, lng, sender_psid) {
                 },
                 {
                   "title": body.results[1].name,
-                  "subtitle": body.results[1].vicinity,
+                  "subtitle": body.results[1].rating,
                   "image_url": img_url1,
                   "buttons": [
                     {
                       "title": "View",
                       "type": "web_url",
-                      "url": "http://www.riccardodesanti.com",
+                      "url": "https://www.google.com/maps/search/?api=1&query="+body.results[1].name+" "+ body.results[1].vicinity +"&query_place_id="+body.results[1].place_id,
                       // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
                       // "fallback_url": ""
@@ -332,13 +332,13 @@ function findAndShow(lat, lng, sender_psid) {
                 },
                 {
                   "title": body.results[2].name,
-                  "subtitle": body.results[2].vicinity,
+                  "subtitle": body.results[2].rating,
                   "image_url": img_url2,
                   "buttons": [
                     {
                       "title": "View",
                       "type": "web_url",
-                      "url": "http://www.riccardodesanti.com",
+                      "url": "https://www.google.com/maps/search/?api=1&query="+body.results[2].name+" "+ body.results[2].vicinity +"&query_place_id="+body.results[2].place_id,
                       // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
                       // "fallback_url": ""
