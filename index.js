@@ -303,9 +303,9 @@ function findAndShow(lat, lng, sender_psid) {
                       "title": "View",
                       "type": "web_url",
                       "url": "http://www.riccardodesanti.com",
-                      "messenger_extensions": true,
+                      // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      "fallback_url": ""
+                      // "fallback_url": ""
                     }
                   ]
                 },
@@ -315,7 +315,7 @@ function findAndShow(lat, lng, sender_psid) {
                   "default_action": {
                     "type": "web_url",
                     "url": "http://www.riccardodesanti.com",
-                    "messenger_extensions": false,
+                    // "messenger_extensions": false,
                     "webview_height_ratio": "tall"
                   }
                 },
@@ -326,18 +326,18 @@ function findAndShow(lat, lng, sender_psid) {
                   "default_action": {
                     "type": "web_url",
                     "url": "http://www.riccardodesanti.com",
-                    "messenger_extensions": true,
+                    // "messenger_extensions": true,
                     "webview_height_ratio": "tall",
-                    "fallback_url": ""
+                    // "fallback_url": ""
                   },
                   "buttons": [
                     {
                       "title": "Shop Now",
                       "type": "web_url",
                       "url": "http://www.riccardodesanti.com",
-                      "messenger_extensions": true,
+                      // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
-                      "fallback_url": ""
+                      // "fallback_url": ""
                     }
                   ]
                 }
