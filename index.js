@@ -351,7 +351,7 @@ function findAndShow(lat, lng, sender_psid) {
           }
         }
      }
-
+     console.log(body.results[0].photos[0]);
      console.log("request_body defined");
      postMessage(request_body);
   });
