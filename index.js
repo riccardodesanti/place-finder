@@ -135,7 +135,7 @@ function handleMessage(sender_psid, received_message, user_first_name) {
           break;
         case "distance":
           console.log("distance");
-          // response = "What is the maximum distance in kilometers that you prefer?";
+          response = "What is the maximum distance in kilometers that you prefer?";
           quick_replies =  [
           {
             "content_type":"text",
