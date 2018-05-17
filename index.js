@@ -283,7 +283,7 @@ function findAndShow(lat, lng, sender_psid) {
      console.log(body);
 
      let request_body = {
-       "messaging_type": "text",
+       "messaging_type": "application/json",
        "recipient": {
          "id": sender_psid
        },
@@ -292,7 +292,7 @@ function findAndShow(lat, lng, sender_psid) {
             "type": "template",
             "payload": {
               "template_type": "list",
-              "top_element_style": "large",
+              "top_element_style": "compact",
               "elements": [
                 {
                   "title": "Classic T-Shirt Collection",
