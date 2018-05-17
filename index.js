@@ -345,13 +345,6 @@ function findAndShow(lat, lng, sender_psid) {
                     }
                   ]
                 }
-              ],
-               "buttons": [
-                {
-                  "title": "View More",
-                  "type": "postback",
-                  "payload": "payload"
-                }
               ]
             }
           }
