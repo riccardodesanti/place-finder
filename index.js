@@ -314,18 +314,18 @@ function findAndShow(lat, lng, sender_psid) {
                   "subtitle": "See all our colors",
                   "default_action": {
                     "type": "web_url",
-                    "url": "http://www.riccardodesanti.com",
+                    "url": "",
                     // "messenger_extensions": false,
                     "webview_height_ratio": "tall"
                   }
                 },
                 {
                   "title": "Classic Blue T-Shirt",
-                  "image_url": "http://www.riccardodesanti.com/images/main-image.png",
+                  "image_url": "",
                   "subtitle": "100% Cotton, 200% Comfortable",
                   "default_action": {
                     "type": "web_url",
-                    "url": "http://www.riccardodesanti.com",
+                    "url": "",
                     // "messenger_extensions": true,
                     "webview_height_ratio": "tall",
                     // "fallback_url": ""
@@ -334,7 +334,7 @@ function findAndShow(lat, lng, sender_psid) {
                     {
                       "title": "Shop Now",
                       "type": "web_url",
-                      "url": "http://www.riccardodesanti.com",
+                      "url": "",
                       // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
                       // "fallback_url": ""
