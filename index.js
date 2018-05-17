@@ -3,6 +3,7 @@
 // Imports dependencies and set up http server
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const access_token = "EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD";
 const
   express = require('express'),
   bodyParser = require('body-parser'),
@@ -51,31 +52,26 @@ if (body.object === 'page') {
 }
 });
 
+// Test function
 app.get("/", function (req, res) {
   res.send("Deployed!");
 });
 
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
-
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = process.env.VERIFY_TOKEN
-
   // Parse the query params
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];
   let challenge = req.query['hub.challenge'];
-
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
-
     // Checks the mode and token sent is correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
       // Responds with the challenge token from the request
       console.log('WEBHOOK_VERIFIED');
       res.status(200).send(challenge);
-
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
@@ -83,6 +79,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+// Verifies the presence of a nlp entity and define its confidence
 function firstEntity(nlp, name) {
   return nlp && nlp.entities && nlp.entities[name] && nlp.entities[name][0];
 }
@@ -93,48 +90,30 @@ function handleMessage(sender_psid, received_message, user_first_name) {
   // Checks if message contains greetings or date/time
   const greeting = firstEntity(received_message.nlp, 'greetings');
   const position = firstEntity(received_message.nlp, 'location');
-  // const date = firstEntity(received_message.nlp, 'datetime');
-  //
-  // if (date && date.confidence > 0.8) {
-  //   let response = { "text" : "Please confirm that you would like to visit us on "+ date.value}
-  //   // Sends the response message
-  //   callSendAPI(sender_psid, response, null);
-  // }
-  // else {
-  if ( received_message.quick_reply) {
+
+// When a quick_reply is used the next message received contains a quick_reply property. This function checks its existence.
+  if (received_message.quick_reply) {
     let payload = received_message.quick_reply.payload;
     let response;
     let quick_replies = null;
-
     // Set the response based on the postback payload
       switch (payload) {
         case "1":
           distance = 1;
-          console.log("1 km selected");
-          // response = "Great, I'll show you the best rated within 1 km.";
           break;
         case "5":
           distance = 5;
-          console.log("5 km selected");
-          // response = "Great, I'll show you the best rated within 5 km.";
           break;
         case "10":
           distance = 10;
-          console.log("10 km selected");
-          // response = "Great, I'll show you the best rated within 10 km.";
           break;
         case "50":
           distance = 50;
-          console.log("50 km selected");
-          // response = "Great, I'll show you the best rated within 50 km.";
           break;
         case "whatever":
           distance = "whatever";
-          console.log("whatever km selected");
-          // response = "Great, I'll show you the best rated.";
           break;
         case "distance":
-          console.log("distance");
           response = "What is the maximum distance in kilometers that you prefer?";
           quick_replies =  [
           {
@@ -165,20 +144,20 @@ function handleMessage(sender_psid, received_message, user_first_name) {
         ];
         break;
         case "prominence":
-          console.log("distance");
           break;
         default: console.log("default case");
       }
-    // callSendAPI(sender_psid, response, quick_replies);
+
     if ( payload == "distance") {
       callSendAPI(sender_psid, response, quick_replies);
     } else {
       askPosition(sender_psid);
     }
   }
+  // If  the message contain a greeting with a high level of confidence it is supposed to be the first message.
   else if (greeting && greeting.confidence > 0.9) {
     let user_first_name;
-    request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token=EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD', { json: true }, (err, res, body) => {
+    request('https://graph.facebook.com/v2.6/'+ sender_psid + '?fields=first_name,last_name&access_token='+access_token, { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
       let user_first_name = body.first_name;
       // Creates the payload for a basic text messages
@@ -248,7 +227,7 @@ function postMessage(request_body) {
   //Sends the HTTP request to the Messenger Platform
   request({
     "uri": "https://graph.facebook.com/v2.6/me/messages",
-    "qs": { "access_token": "EAADJeIc5WcYBALY1X0tGsPgDgZADy1zLZAbLZAszZCpHKl57ZA0EZADZAadNDU4UqKahUvQ6QMN0qEfI6hZBMb1ZBZC2pbwGrqrshplzG2mCMvYBwWIBVx2tFhnGaZBIjpfcbCbMu8NkLy9ZB8nSPYAfIj0jSZCcloajEZCVCOZCjXY21BKZBAZDZD"},
+    "qs": { "access_token": access_token},
     "method": "POST",
     "json": request_body
   }, (err, res, body) => {
