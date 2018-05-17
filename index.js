@@ -283,7 +283,7 @@ function findAndShow(lat, lng, sender_psid) {
      console.log(body);
 
      let imgTest = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey;
-
+     console.log("https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="+body.results[1].photos[0].photo_reference+"&key="+myKey);
      let img_url0 = body.results[0].icon;
      let img_url1 = body.results[1].icon;
      let img_url2 = body.results[2].icon;
