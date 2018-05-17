@@ -308,7 +308,7 @@ function findAndShow(lat, lng, sender_psid) {
                     {
                       "title": "View",
                       "type": "web_url",
-                      "url": "http://www.riccardodesanti.com",
+                      "url": "https://www.google.com/maps/search/?api=1&query="+body.results[0].name+" "+ body.results[0].vicinity +"&query_place_id="+body.results[0].place_id,
                       // "messenger_extensions": true,
                       "webview_height_ratio": "tall",
                       // "fallback_url": ""
